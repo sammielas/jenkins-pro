@@ -17,7 +17,7 @@ pipeline {
         stage('Setup') {
             steps {
                 sh 'ls -la' // Debug: List files in the workspace
-                sh "pip install -r ./04/requirements.txt"
+                sh "pip install -r ./04-docker/requirements.txt"
             }
         }
         stage('Test') {
@@ -38,7 +38,7 @@ pipeline {
         {
             steps
             {
-                sh 'docker build -t ${IMAGE_TAG} ./04/Dockerfile'
+                sh 'docker build -t ${IMAGE_TAG} ./04-docker/Dockerfile'
                 echo "Docker image build successfully"
                 sh 'docker image ls'
                 

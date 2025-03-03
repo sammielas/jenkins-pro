@@ -43,6 +43,7 @@ pipeline {
         {
             steps
             {
+                sh 'ls -la 04-docker' // Debug: List files in the 04-docker directory
                 sh 'docker build -t ${IMAGE_TAG} /04-docker/Dockerfile'
                 echo "Docker image build successfully"
                 sh 'docker image ls'

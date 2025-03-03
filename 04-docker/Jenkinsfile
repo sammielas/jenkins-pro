@@ -1,9 +1,6 @@
 pipeline {
    agent {
-        docker {
-            image 'python:3.9' // Use a Python 3.x image
-        }
-    }
+      
 
     environment {
         IMAGE_NAME = 'sammielas/jenkins-flask-app'
@@ -14,15 +11,15 @@ pipeline {
     
     stages {
 
-        stage('Setup') {
-            steps {
-                 sh '''
-                    python3 -m venv /tmp/venv
-                    . /tmp/venv/bin/activate
-                    pip install -r ./04-docker/requirements.txt
-                '''
-            }
-        }
+        // stage('Setup') {
+        //     steps {
+        //          sh '''
+        //             python3 -m venv /tmp/venv
+        //             . /tmp/venv/bin/activate
+        //             pip install -r ./04-docker/requirements.txt
+        //         '''
+        //     }
+        // }
         // stage('Test') {
         //     steps {
         //            sh '''

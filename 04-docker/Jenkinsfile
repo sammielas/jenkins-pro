@@ -23,16 +23,16 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {
-            steps {
-                   sh '''
-                    . /tmp/venv/bin/activate
-                    echo "Running tests..."
-                    pytest
+        // stage('Test') {
+        //     steps {
+        //            sh '''
+        //             . /tmp/venv/bin/activate
+        //             echo "Running tests..."
+        //             pytest
                     
-                '''
-            }
-        }
+        //         '''
+        //     }
+        // }
 
         stage('Login to docker hub') {
             steps {

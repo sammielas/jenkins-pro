@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4caf50;
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+      }
+
+      /* Form Styles */
+      form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      textarea {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus {
+        border-color: #4caf50;
+        outline: none;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      /* Task List Styles */
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: #fff;
+        margin-bottom: 10px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .task-text {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #333;
+      }
+
+      .delete-btn {
+        background-color: #ff4d4d;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .delete-btn:hover {
+        background-color: #e60000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Todo App: v4</h1>
+
+      <!-- Add Task Form -->
+      <form method="post">
+        <input type="text" name="task_content" placeholder="Enter a new task" />
+        <input type="submit" name="add_task" value="Add Task" />
+      </form>
+
+      <!-- Display Tasks -->
+      <h2>Tasks:</h2>
+      <ul>
+        {% for id, task in tasks.items() %}
+        <li class="task-item">
+          <p class="task-text">{{ task }}</p>
+          <!-- Delete Button for Each Task -->
+          <form method="post" style="display: inline">
+            <input type="hidden" name="task_id_to_delete" value="{{ id }}" />
+            <input type="submit" name="delete_task" value="Delete" class="delete-btn" />
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+   agent {
+        docker {
+            image 'python:3.9' // Use a Python 3.x image
+        }
+    }
 
     environment {
         IMAGE_NAME = 'sammielas/jenkins-flask-app'
@@ -9,38 +13,6 @@ pipeline {
 
     
     stages {
-
-stage('Install Python 3 and Pip') {
-            steps {
-                sh '''
-                    # Check if Python 3 is already installed
-                    if ! command -v python3 &> /dev/null; then
-                        echo "Python 3 is not installed. Installing..."
-                        # Install Python 3 and pip based on the OS
-                        if command -v apt-get &> /dev/null; then
-                            # For Debian/Ubuntu-based systems
-                            apt-get update
-                            apt-get install -y python3 python3-pip
-                        elif command -v yum &> /dev/null; then
-                            # For Red Hat/CentOS-based systems
-                            yum install -y python3 python3-pip
-                        elif command -v apk &> /dev/null; then
-                            # For Alpine-based systems
-                            apk add python3 py3-pip
-                        else
-                            echo "Unsupported package manager. Cannot install Python 3."
-                            exit 1
-                        fi
-                    else
-                        echo "Python 3 is already installed."
-                    fi
-
-                    # Verify Python 3 and pip installation
-                    python3 --version
-                    pip --version
-                '''
-            }
-        }
 
         stage('Setup') {
             steps {

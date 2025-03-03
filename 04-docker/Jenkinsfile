@@ -21,7 +21,6 @@ pipeline {
                     source /tmp/venv/bin/activate
                     pip install -r ./04-docker/requirements.txt
                 '''
-                sh 
             }
         }
         stage('Test') {

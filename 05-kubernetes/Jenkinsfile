@@ -84,7 +84,35 @@ pipeline {
         //         sh "kubectl set image deployment/flask-app flask-app=${IMAGE_TAG}"
         //     }
         // }       
+            stage('Deploy Service') {
+            steps {
+                echo "Deploying Flask App Service..."
+                sh 'kubectl apply -f 05-kubernetes/k8s/flask-app-service.yaml'
+            }
+        }
 
+        stage('Get Service URL') {
+            steps {
+                script {
+                    echo "Waiting for LoadBalancer external IP..."
+                    def externalIP = ""
+
+                    for (int i = 0; i < 10; i++) {  // Retry up to 10 times (10s intervals)
+                        sleep(10)
+                        externalIP = sh(script: "kubectl get svc flask-app-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
+
+                        if (externalIP) {
+                            break
+                        }
+                    }
+
+                    if (!externalIP) {
+                        error("Failed to get LoadBalancer external IP")
+                    }
+
+                    echo "✅ Flask App is available at: http://${externalIP}:5000"
+                }
+            }
         
     }
 }

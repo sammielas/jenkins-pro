@@ -38,7 +38,7 @@ pipeline {
         {
             steps
             {
-                sh 'docker build -t ${IMAGE_TAG} .'
+                sh 'docker build -t ${IMAGE_TAG} 05-kubernetes'
                 echo "Docker image build successfully"
                 sh 'docker image ls'
                 

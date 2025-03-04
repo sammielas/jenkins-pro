@@ -87,7 +87,8 @@ pipeline {
             stage('Deploy Service') {
             steps {
                 echo "Deploying Flask App Service..."
-                sh 'kubectl apply -f 05-kubernetes/k8s/flask-app-service.yaml'
+                sh 'kubectl apply -f 05-kubernetes/k8s/service.yaml'
+                
             }
         }
 
